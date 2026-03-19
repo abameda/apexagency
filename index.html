@@ -545,6 +545,115 @@
       }
       .stat-divider { display: none; }
     }
+
+    /* Features */
+    .features {
+      padding: var(--section-padding);
+      position: relative;
+      overflow: hidden;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-header h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 200;
+      letter-spacing: -0.5px;
+      margin-top: 8px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--glass-fill);
+      border: 1px solid var(--glass-border-color);
+      border-radius: 12px;
+      padding: 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      will-change: transform;
+    }
+    .feature-card:hover {
+      background: var(--hover-subtle);
+      border-color: var(--hover-strong);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+    .feature-card h3 {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Floating 3D shapes */
+    .features-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .shape {
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.01);
+    }
+    .shape-1 {
+      width: 80px; height: 80px;
+      top: 15%; right: 8%;
+      transform: rotate(45deg);
+      animation: shapeRotate1 20s linear infinite;
+    }
+    .shape-2 {
+      width: 50px; height: 50px;
+      bottom: 20%; left: 5%;
+      border-radius: 50%;
+      animation: shapeRotate2 25s linear infinite;
+    }
+    .shape-3 {
+      width: 60px; height: 60px;
+      top: 60%; right: 15%;
+      border-radius: 8px;
+      animation: shapeRotate3 18s linear infinite;
+    }
+    @keyframes shapeRotate1 {
+      0% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(225deg) translateY(-20px); }
+      100% { transform: rotate(405deg) translateY(0); }
+    }
+    @keyframes shapeRotate2 {
+      0% { transform: scale(1) translateX(0); }
+      50% { transform: scale(1.1) translateX(15px); }
+      100% { transform: scale(1) translateX(0); }
+    }
+    @keyframes shapeRotate3 {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -626,7 +735,63 @@
         </div>
       </div>
     </section>
-    <section id="features" class="features"></section>
+    <section id="features" class="features">
+      <div class="features-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="label">WHAT YOU GET</span>
+          <h2>Built Different</h2>
+        </div>
+        <div class="features-grid reveal-group">
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h3>Blazing Performance</h3>
+            <p>Sub-2s load times. Optimized assets, lazy loading, minimal JS overhead.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+            </div>
+            <h3>Mobile-First Design</h3>
+            <p>Built mobile-first. Every pixel considered for thumb-friendly navigation.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <h3>Conversion Optimized</h3>
+            <p>Every layout decision backed by conversion data. Sell more, effortlessly.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+            </div>
+            <h3>One-Click Setup</h3>
+            <p>Import demo content in one click. Be live in minutes, not days.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <h3>SEO Ready</h3>
+            <p>Clean semantic markup, structured data, optimized meta. Rank higher.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <h3>Premium Support</h3>
+            <p>Direct access to our team. Real humans, real answers, real fast.</p>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="preview" class="preview"></section>
     <section id="pricing" class="pricing"></section>
     <section id="faq" class="faq"></section>
@@ -816,6 +981,21 @@
       }, { threshold: 0.2 });
 
       document.querySelectorAll('.stat').forEach(s => observer.observe(s));
+    })();
+
+    // 3D Tilt on hover
+    (function() {
+      document.querySelectorAll('[data-tilt]').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `perspective(1000px) rotateX(${y * -8}deg) rotateY(${x * 8}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
     })();
   </script>
 </body>
