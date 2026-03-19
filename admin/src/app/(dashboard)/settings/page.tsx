@@ -11,6 +11,7 @@ export default function SettingsPage() {
   const [editingMethod, setEditingMethod] = useState<any | null>(null);
   const [addingMethod, setAddingMethod] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [newAdminEmail, setNewAdminEmail] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -162,18 +163,19 @@ export default function SettingsPage() {
           <input
             type="email"
             placeholder="New admin email..."
-            id="newAdminEmail"
+            value={newAdminEmail}
+            onChange={(e) => setNewAdminEmail(e.target.value)}
             className="flex-1 bg-elevated border border-border rounded-lg px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-text-secondary"
           />
           <button
             onClick={async () => {
-              const email = (document.getElementById("newAdminEmail") as HTMLInputElement).value;
-              if (!email) return;
+              if (!newAdminEmail) return;
               await fetch("/api/admin-users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email: newAdminEmail }),
               });
+              setNewAdminEmail("");
               fetchData();
             }}
             className="bg-text-primary text-bg text-sm px-4 py-2.5 rounded-lg hover:bg-text-secondary transition-colors"

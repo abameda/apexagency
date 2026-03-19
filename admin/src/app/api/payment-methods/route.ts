@@ -53,12 +53,22 @@ export async function PUT(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { id, name, account_name, handle, qr_code_url, direct_link, is_active, display_order } = body;
+  const { id } = body;
+  if (!id) {
+    return NextResponse.json({ error: "Missing id" }, { status: 400 });
+  }
+
+  const ALLOWED_FIELDS = ["name", "account_name", "handle", "qr_code_url", "direct_link", "is_active", "display_order"] as const;
+  const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
+  for (const key of ALLOWED_FIELDS) {
+    if (body[key] !== undefined) updates[key] = body[key];
+  }
+
   const admin = createAdminClient();
 
   const { error } = await admin
     .from("payment_methods")
-    .update({ name, account_name, handle, qr_code_url, direct_link, is_active, display_order, updated_at: new Date().toISOString() })
+    .update(updates)
     .eq("id", id);
 
   if (error) {
@@ -77,6 +87,9 @@ export async function DELETE(request: NextRequest) {
   }
 
   const { id } = await request.json();
+  if (!id) {
+    return NextResponse.json({ error: "Missing id" }, { status: 400 });
+  }
   const admin = createAdminClient();
 
   const { error } = await admin
