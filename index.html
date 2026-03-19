@@ -973,6 +973,64 @@
       border-radius: 8px;
       font-size: 13px;
     }
+    /* Reviews */
+    .reviews-section { padding: var(--section-padding); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .review-card {
+      background: var(--glass-fill);
+      border: 1px solid var(--glass-border-color);
+      border-radius: 12px;
+      padding: 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      will-change: transform;
+    }
+    .review-card:hover {
+      background: var(--hover-subtle);
+      border-color: var(--hover-strong);
+      transform: translateY(-4px);
+    }
+    .review-stars {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .review-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .review-author {
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding-top: 12px;
+    }
+    .review-name {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-primary);
+      display: block;
+    }
+    .review-store {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* FAQ */
     .faq-section { padding: var(--section-padding); }
     .faq-list { max-width: 600px; margin: 0 auto; }
@@ -1323,6 +1381,64 @@
             <li>SEO & Speed Optimized</li>
           </ul>
           <a href="#" class="cta-btn pricing-cta">GET THE THEME</a>
+        </div>
+      </div>
+    </section>
+    <section id="reviews" class="reviews-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="label">WHAT STORE OWNERS SAY</span>
+          <h2>Trusted by Brands Worldwide</h2>
+        </div>
+        <div class="reviews-grid reveal-group">
+          <div class="review-card reveal" data-tilt>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Conversion rate up 40% in the first month. APEX paid for itself in days."</p>
+            <div class="review-author">
+              <span class="review-name">Ahmed Hassan</span>
+              <span class="review-store">Luxe Leather Co. — Fashion</span>
+            </div>
+          </div>
+          <div class="review-card reveal" data-tilt>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Setup took 20 minutes. Our store looks like a $10k custom build."</p>
+            <div class="review-author">
+              <span class="review-name">Sarah Mitchell</span>
+              <span class="review-store">Glow Ritual — Skincare</span>
+            </div>
+          </div>
+          <div class="review-card reveal" data-tilt>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"The fastest theme we've tested. Customers actually compliment how smooth our store feels."</p>
+            <div class="review-author">
+              <span class="review-name">Nour El-Din</span>
+              <span class="review-store">Maison Digitale — Home & Lifestyle</span>
+            </div>
+          </div>
+          <div class="review-card reveal" data-tilt>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Cart drawer upsells generate an extra $2k/month. APEX basically prints money."</p>
+            <div class="review-author">
+              <span class="review-name">James Crawford</span>
+              <span class="review-store">Nordic Watches — Jewelry</span>
+            </div>
+          </div>
+          <div class="review-card reveal" data-tilt>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Support replied in 15 minutes on a Friday night. That's when I knew we picked right."</p>
+            <div class="review-author">
+              <span class="review-name">Fatima Al-Rashid</span>
+              <span class="review-store">Aura Wellness — Health</span>
+            </div>
+          </div>
+          <div class="review-card reveal" data-tilt>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Our bounce rate dropped by half. The mobile experience is unmatched."</p>
+            <div class="review-author">
+              <span class="review-name">Omar Khalil</span>
+              <span class="review-store">THREADS Studio — Clothing</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
