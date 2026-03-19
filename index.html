@@ -110,6 +110,50 @@
     .reveal-group .reveal:nth-child(4) { transition-delay: 0.2s; }
     .reveal-group .reveal:nth-child(5) { transition-delay: 0.25s; }
     .reveal-group .reveal:nth-child(6) { transition-delay: 0.3s; }
+
+    /* Custom cursor */
+    .cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 6px; height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      width: 32px; height: 32px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* Cursor hover states */
+    .cursor-ring.cursor-hover-link {
+      width: 48px; height: 48px;
+      border-color: rgba(255,255,255,0.3);
+    }
+    .cursor-dot.cursor-hover-text {
+      width: 2px; height: 20px;
+      border-radius: 1px;
+    }
+    .cursor-ring.cursor-hover-card {
+      width: 60px; height: 60px;
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    /* Hide custom cursor on touch devices */
+    @media (pointer: coarse) {
+      .cursor-dot, .cursor-ring { display: none; }
+      body { cursor: auto; }
+    }
   </style>
 </head>
 <body>
@@ -124,8 +168,57 @@
     <section id="faq" class="faq"></section>
   </main>
   <footer id="contact" class="footer"></footer>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
   <script>
-    // JS will go here
+    // Custom Cursor
+    (function() {
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      if (!dot || !ring) return;
+
+      let mouseX = 0, mouseY = 0;
+      let ringX = 0, ringY = 0;
+      const LERP = 0.15;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * LERP;
+        ringY += (mouseY - ringY) * LERP;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      // Hover states
+      document.addEventListener('mouseover', (e) => {
+        const link = e.target.closest('a, button, [role="button"], .nav-link, .cta-btn');
+        const card = e.target.closest('.feature-card, .pricing-card, .faq-item');
+        const text = e.target.closest('p, h1, h2, h3, span:not(.nav-logo)');
+        if (link) {
+          ring.classList.add('cursor-hover-link');
+        } else if (card) {
+          ring.classList.add('cursor-hover-card');
+        } else if (text && !link && !card) {
+          dot.classList.add('cursor-hover-text');
+        }
+      });
+      document.addEventListener('mouseout', (e) => {
+        const link = e.target.closest('a, button, [role="button"], .nav-link, .cta-btn');
+        const card = e.target.closest('.feature-card, .pricing-card, .faq-item');
+        const text = e.target.closest('p, h1, h2, h3, span:not(.nav-logo)');
+        if (link) ring.classList.remove('cursor-hover-link');
+        if (card) ring.classList.remove('cursor-hover-card');
+        if (text) dot.classList.remove('cursor-hover-text');
+      });
+    })();
   </script>
 </body>
 </html>
