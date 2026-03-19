@@ -158,6 +158,125 @@
       border-color: rgba(255,255,255,0.08);
     }
 
+    /* Liquid Glass Background */
+    .liquid-glass {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .glass-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      will-change: transform, border-radius;
+    }
+    .glass-blob-1 {
+      width: 600px; height: 600px;
+      top: -10%; left: -5%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 50%, transparent 70%);
+      animation: blobMorph1 18s ease-in-out infinite alternate;
+    }
+    .glass-blob-2 {
+      width: 400px; height: 400px;
+      bottom: 10%; right: -5%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 50%, transparent 70%);
+      animation: blobMorph2 22s ease-in-out infinite alternate;
+    }
+    .glass-blob-3 {
+      width: 500px; height: 500px;
+      top: 40%; right: 20%;
+      background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 50%, transparent 70%);
+      animation: blobMorph3 20s ease-in-out infinite alternate;
+    }
+    .glass-blob-4 {
+      width: 350px; height: 350px;
+      bottom: 30%; left: 10%;
+      background: radial-gradient(circle, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 50%, transparent 70%);
+      animation: blobMorph4 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes blobMorph1 {
+      0% {
+        transform: translate(0, 0) scale(1);
+        border-radius: 40% 60% 70% 30% / 50% 40% 60% 50%;
+      }
+      33% {
+        transform: translate(80px, 50px) scale(1.1);
+        border-radius: 60% 40% 30% 70% / 40% 60% 50% 50%;
+      }
+      66% {
+        transform: translate(-30px, 80px) scale(0.95);
+        border-radius: 50% 50% 40% 60% / 60% 30% 70% 40%;
+      }
+      100% {
+        transform: translate(40px, -20px) scale(1.05);
+        border-radius: 30% 70% 60% 40% / 50% 50% 40% 60%;
+      }
+    }
+    @keyframes blobMorph2 {
+      0% {
+        transform: translate(0, 0) scale(1);
+        border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%;
+      }
+      33% {
+        transform: translate(-60px, -40px) scale(1.15);
+        border-radius: 70% 30% 50% 50% / 60% 40% 50% 50%;
+      }
+      66% {
+        transform: translate(50px, -60px) scale(0.9);
+        border-radius: 40% 60% 60% 40% / 50% 50% 40% 60%;
+      }
+      100% {
+        transform: translate(-20px, 30px) scale(1.08);
+        border-radius: 60% 40% 40% 60% / 30% 70% 50% 50%;
+      }
+    }
+    @keyframes blobMorph3 {
+      0% {
+        transform: translate(0, 0) scale(1);
+        border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%;
+      }
+      33% {
+        transform: translate(40px, 70px) scale(1.1);
+        border-radius: 40% 60% 40% 60% / 60% 40% 50% 50%;
+      }
+      66% {
+        transform: translate(-50px, 20px) scale(0.95);
+        border-radius: 50% 50% 70% 30% / 40% 60% 40% 60%;
+      }
+      100% {
+        transform: translate(30px, -40px) scale(1.05);
+        border-radius: 70% 30% 40% 60% / 50% 50% 60% 40%;
+      }
+    }
+    @keyframes blobMorph4 {
+      0% {
+        transform: translate(0, 0) scale(1);
+        border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+      }
+      33% {
+        transform: translate(-40px, 60px) scale(1.12);
+        border-radius: 30% 70% 50% 50% / 60% 40% 60% 40%;
+      }
+      66% {
+        transform: translate(60px, -30px) scale(0.92);
+        border-radius: 60% 40% 30% 70% / 40% 60% 50% 50%;
+      }
+      100% {
+        transform: translate(-20px, -50px) scale(1.06);
+        border-radius: 40% 60% 60% 40% / 50% 50% 40% 60%;
+      }
+    }
+
+    /* Reduced motion — freeze blobs */
+    @media (prefers-reduced-motion: reduce) {
+      .glass-blob {
+        animation: none !important;
+      }
+    }
+
     /* Nav - Common */
     #nav {
       position: fixed;
@@ -942,6 +1061,12 @@
   </style>
 </head>
 <body>
+  <div class="liquid-glass" aria-hidden="true">
+    <div class="glass-blob glass-blob-1"></div>
+    <div class="glass-blob glass-blob-2"></div>
+    <div class="glass-blob glass-blob-3"></div>
+    <div class="glass-blob glass-blob-4"></div>
+  </div>
   <a href="#main" class="skip-link">Skip to content</a>
   <nav id="nav" data-nav-style="a">
     <div class="nav-inner">
