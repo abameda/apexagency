@@ -119,6 +119,9 @@
     .reveal-group .reveal:nth-child(4) { transition-delay: 0.2s; }
     .reveal-group .reveal:nth-child(5) { transition-delay: 0.25s; }
     .reveal-group .reveal:nth-child(6) { transition-delay: 0.3s; }
+    .reveal-group .reveal:nth-child(7) { transition-delay: 0.35s; }
+    .reveal-group .reveal:nth-child(8) { transition-delay: 0.4s; }
+    .reveal-group .reveal:nth-child(9) { transition-delay: 0.45s; }
 
     /* Custom cursor */
     .cursor-dot {
@@ -730,6 +733,14 @@
       color: var(--text-secondary);
       line-height: 1.6;
     }
+    .features-more {
+      text-align: center;
+      margin-top: 32px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+    }
 
     /* Floating 3D shapes */
     .features-shapes {
@@ -1159,47 +1170,69 @@
         <div class="features-grid reveal-group">
           <div class="feature-card reveal" data-tilt>
             <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+            </div>
+            <h3>Interactive Product Quiz</h3>
+            <p>Guide customers to their perfect product with a built-in quiz engine that learns and recommends.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </div>
+            <h3>Immersive Product Layouts</h3>
+            <p>Multiple product page styles — minimalist, immersive, and bundle-ready. Pick what fits your brand.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+            </div>
+            <h3>Smart Cart Drawer</h3>
+            <p>Slide-out cart with built-in upsells, cross-sells, and discount codes. More revenue per checkout.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </div>
+            <h3>Wishlist & Back-in-Stock</h3>
+            <p>Let customers save favorites and get notified when sold-out items return. Never lose a sale.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Quick View</h3>
+            <p>Instant product previews without leaving the page. Reduce friction, increase add-to-carts.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3>Countdown Timers</h3>
+            <p>Create urgency with sale and launch countdowns on any section. Drive action when it matters.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </div>
+            <h3>Brand Storytelling</h3>
+            <p>Heritage, ritual, and journey sections that sell the story behind your brand. Emotion drives sales.</p>
+          </div>
+          <div class="feature-card reveal" data-tilt>
+            <div class="feature-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             </div>
             <h3>Blazing Performance</h3>
-            <p>Sub-2s load times. Optimized assets, lazy loading, minimal JS overhead.</p>
+            <p>Sub-2s load times. Anti-FOUC, lazy loading, minimal JS. Consistent 90+ PageSpeed scores.</p>
           </div>
           <div class="feature-card reveal" data-tilt>
             <div class="feature-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
             </div>
             <h3>Mobile-First Design</h3>
-            <p>Built mobile-first. Every pixel considered for thumb-friendly navigation.</p>
-          </div>
-          <div class="feature-card reveal" data-tilt>
-            <div class="feature-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            </div>
-            <h3>Conversion Optimized</h3>
-            <p>Every layout decision backed by conversion data. Sell more, effortlessly.</p>
-          </div>
-          <div class="feature-card reveal" data-tilt>
-            <div class="feature-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-            </div>
-            <h3>One-Click Setup</h3>
-            <p>Import demo content in one click. Be live in minutes, not days.</p>
-          </div>
-          <div class="feature-card reveal" data-tilt>
-            <div class="feature-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            </div>
-            <h3>SEO Ready</h3>
-            <p>Clean semantic markup, structured data, optimized meta. Rank higher.</p>
-          </div>
-          <div class="feature-card reveal" data-tilt>
-            <div class="feature-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-            </div>
-            <h3>Premium Support</h3>
-            <p>Direct access to our team. Real humans, real answers, real fast.</p>
+            <p>Every pixel built for thumbs first. Responsive layouts that look premium on every screen size.</p>
           </div>
         </div>
+        <p class="features-more reveal">+ 50 MORE SECTIONS INCLUDED</p>
       </div>
     </section>
     <section id="preview" class="preview">
