@@ -494,6 +494,57 @@
       .hero-cta-primary, .hero-cta-secondary { width: 100%; text-align: center; }
       .hero-mockup-wrap { max-width: 280px; }
     }
+
+    /* Stats Bar */
+    .stats {
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 0;
+    }
+    .stats-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    .stat {
+      text-align: center;
+      flex: 1;
+    }
+    .stat-number {
+      font-family: var(--font-mono);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 300;
+      color: var(--text-primary);
+    }
+    .stat-suffix {
+      font-family: var(--font-mono);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 300;
+      color: var(--text-primary);
+    }
+    .stat-label {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .stat-divider { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -552,7 +603,29 @@
         </div>
       </div>
     </section>
-    <section id="stats" class="stats"></section>
+    <section id="stats" class="stats">
+      <div class="container stats-grid">
+        <div class="stat reveal" data-target="500" data-suffix="+">
+          <span class="stat-number">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">STORES</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat reveal" data-target="99" data-suffix="%">
+          <span class="stat-number">0</span><span class="stat-suffix">%</span>
+          <span class="stat-label">SATISFACTION</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat reveal" data-target="2" data-suffix="s">
+          <span class="stat-number">0</span><span class="stat-suffix">s</span>
+          <span class="stat-label">LOAD SPEED</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat reveal" data-no-count>
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">SUPPORT</span>
+        </div>
+      </div>
+    </section>
     <section id="features" class="features"></section>
     <section id="preview" class="preview"></section>
     <section id="pricing" class="pricing"></section>
@@ -706,6 +779,43 @@
             `rotateY(${rotY}deg) rotateX(${rotX}deg) translateY(0)`;
         });
       }
+    })();
+
+    // Counter animation
+    (function() {
+      function animateCounter(el) {
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const numberEl = el.querySelector('.stat-number');
+        const duration = 2000;
+        const start = performance.now();
+
+        function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const value = Math.round(easeOut(progress) * target);
+          numberEl.textContent = value;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            if (!el.dataset.noCount && el.dataset.target) {
+              animateCounter(el);
+            }
+            el.classList.add('revealed');
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      document.querySelectorAll('.stat').forEach(s => observer.observe(s));
     })();
   </script>
 </body>
