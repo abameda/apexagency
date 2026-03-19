@@ -12,29 +12,29 @@ Single-page website for APEX Agency, a premium Shopify theme agency. Single self
 
 Monochromatic — hierarchy through opacity and luminance only.
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| Background | `#0A0A0A` | Page background |
-| Surface | `#111111` | Stats bar, elevated sections |
-| Elevated | `#1A1A1A` | Cards on hover |
-| Primary Text | `#FFFFFF` | Headings, CTAs |
-| Secondary Text | `rgba(255,255,255,0.5)` | Body text |
-| Muted Text | `rgba(255,255,255,0.25)` | Labels, captions |
-| Border | `rgba(255,255,255,0.08)` | Card/section borders |
-| Glass Fill | `rgba(255,255,255,0.03)` | Glassmorphism backgrounds |
-| Glass Border | `rgba(255,255,255,0.08)` | Glassmorphism borders |
-| Hover Brighten (subtle) | `rgba(255,255,255,0.06)` | Card backgrounds on hover |
-| Hover Brighten (strong) | `rgba(255,255,255,0.1)` | Borders, active states on hover |
+| Token                   | Value                    | Usage                           |
+| ----------------------- | ------------------------ | ------------------------------- |
+| Background              | `#0A0A0A`                | Page background                 |
+| Surface                 | `#111111`                | Stats bar, elevated sections    |
+| Elevated                | `#1A1A1A`                | Cards on hover                  |
+| Primary Text            | `#FFFFFF`                | Headings, CTAs                  |
+| Secondary Text          | `rgba(255,255,255,0.5)`  | Body text                       |
+| Muted Text              | `rgba(255,255,255,0.25)` | Labels, captions                |
+| Border                  | `rgba(255,255,255,0.08)` | Card/section borders            |
+| Glass Fill              | `rgba(255,255,255,0.03)` | Glassmorphism backgrounds       |
+| Glass Border            | `rgba(255,255,255,0.08)` | Glassmorphism borders           |
+| Hover Brighten (subtle) | `rgba(255,255,255,0.06)` | Card backgrounds on hover       |
+| Hover Brighten (strong) | `rgba(255,255,255,0.1)`  | Borders, active states on hover |
 
 ### Typography
 
 All fonts from Google Fonts.
 
-| Font | Weight | Usage |
-|------|--------|-------|
-| Orbitron | 300–400 | Logo, headings (thin weights for luxury feel) |
-| Space Grotesk | 300–400 | Body text, descriptions, UI elements |
-| JetBrains Mono | 400 | Stats numbers, labels, code accents |
+| Font           | Weight  | Usage                                         |
+| -------------- | ------- | --------------------------------------------- |
+| Orbitron       | 300–400 | Logo, headings (thin weights for luxury feel) |
+| Space Grotesk  | 300–400 | Body text, descriptions, UI elements          |
+| JetBrains Mono | 400     | Stats numbers, labels, code accents           |
 
 ### Glassmorphism
 
@@ -108,19 +108,23 @@ All implemented with CSS 3D transforms — no WebGL/Three.js.
 Three switchable nav styles via `data-nav-style="a|b|c"` attribute on the `<nav>` element. This is a developer toggle — change the attribute value in the HTML to switch styles. No runtime UI switcher.
 
 **Style A — Full Pill** (default)
+
 - Logo (`APEX` in Orbitron, letter-spacing: 4px, weight 300) on the left
 - Right side: links grouped in a rounded pill (`border-radius: 50px`, glass fill + border) + CTA button next to it
 - CTA: "Get The Theme" — white background, dark text, rounded pill shape
 
 **Style B — Separated Pill**
+
 - Logo left, links pill centered, CTA right
 - Balanced three-part layout
 
 **Style C — All-In-One Capsule**
+
 - Single centered floating pill containing logo, links, and CTA
 - Logo separated by thin vertical divider inside pill
 
 **All Styles — Common Behavior:**
+
 - Fixed to top with `position: fixed`
 - Glass effect strengthens on scroll (background opacity 0.03 → 0.08)
 - Active/hover link gets inner pill highlight (`rgba(255,255,255,0.08)` background)
@@ -132,10 +136,12 @@ Three switchable nav styles via `data-nav-style="a|b|c"` attribute on the `<nav>
 Full viewport height (`100vh`).
 
 **Layout:**
+
 - Left (60%): label, headline, subtext, two CTAs
 - Right (40%): 3D floating store mockup
 
 **Content:**
+
 - Label: `PREMIUM SHOPIFY THEME` — JetBrains Mono, 10px, letter-spacing 4px, 25% white
 - Headline: "The Shopify Theme That Turns Visitors Into Buyers" — Orbitron, ~48px, weight 200, white
 - Subtext: "Built for speed, designed for conversion. The last theme your store will ever need." — Space Grotesk, 16px, 35% white
@@ -143,15 +149,18 @@ Full viewport height (`100vh`).
 - CTA Secondary: "LIVE PREVIEW →" — ghost button, thin white border, placeholder `#` link (owner will add Shopify demo store URL later)
 
 **Geo-Based Pricing:**
+
 - Detection method: `Intl.DateTimeFormat().resolvedOptions().timeZone` — match exactly `"Africa/Cairo"` only
 - If match: show "10,000 LE" pricing throughout the page
 - Otherwise: show "$99" pricing (default/fallback)
 
 **Background:**
+
 - Subtle radial gradient orbs (`rgba(255,255,255,0.02)`) drifting slowly
 - No grid, no scanlines, no particles — clean and minimal
 
 **Store Mockup:**
+
 - CSS browser chrome (three dots, address bar hint)
 - Abstract store layout wireframe inside (nav, hero block, product grid)
 - Wrapped in `perspective(800px)` container
@@ -159,12 +168,14 @@ Full viewport height (`100vh`).
 - Floats with CSS keyframe animation (6s loop)
 
 **Animations:**
+
 - Headline fades in word-by-word (0.1s stagger)
 - Subtext and CTAs fade up after headline completes
 - Mockup slides in from right with slight rotation
 - Background orbs drift continuously
 
 **Mobile:**
+
 - Stacks vertically — text on top, mockup below (smaller, centered)
 - CTAs go full-width
 - Headline font size scales down (~28px)
@@ -175,12 +186,12 @@ Dark surface strip between hero and features.
 
 **Layout:** 4 stats in a row with thin vertical dividers (`1px, rgba(255,255,255,0.06)`)
 
-| Stat | Value | Label |
-|------|-------|-------|
-| Stores | 500+ | STORES |
-| Satisfaction | 99% | SATISFACTION |
-| Load Speed | 2s | LOAD SPEED |
-| Support | 24/7 | SUPPORT |
+| Stat         | Value | Label        |
+| ------------ | ----- | ------------ |
+| Stores       | 500+  | STORES       |
+| Satisfaction | 99%   | SATISFACTION |
+| Load Speed   | 2s    | LOAD SPEED   |
+| Support      | 24/7  | SUPPORT      |
 
 - Numbers: JetBrains Mono, ~28px, weight 300
 - Labels: Space Grotesk, 10px, letter-spacing 3px, 25% white
@@ -191,12 +202,14 @@ Dark surface strip between hero and features.
 ### 4. Features Grid
 
 **Header:**
+
 - Label: `WHAT YOU GET` — JetBrains Mono, 10px, letter-spacing 4px
 - Headline: "Built Different" — Orbitron, ~28px, weight 200
 
 **Grid:** 3 columns × 2 rows (6 cards). Gap: 16px.
 
 **Cards:**
+
 - Glass card style (see Glassmorphism spec)
 - Rounded corners: 12px
 - Each contains: inline SVG icon in bordered square (32px), title (Space Grotesk 14px, white), description (12px, 35% white)
@@ -205,14 +218,14 @@ Dark surface strip between hero and features.
 
 **Features:**
 
-| # | Title | Icon (CSS/SVG) | Description |
-|---|-------|----------------|-------------|
-| 1 | Blazing Performance | Lightning bolt | Sub-2s load times. Optimized assets, lazy loading, minimal JS overhead. |
-| 2 | Mobile-First Design | Phone outline | Built mobile-first. Every pixel considered for thumb-friendly navigation. |
-| 3 | Conversion Optimized | Trending-up arrow | Every layout decision backed by conversion data. Sell more, effortlessly. |
-| 4 | One-Click Setup | Wrench/gear | Import demo content in one click. Be live in minutes, not days. |
-| 5 | SEO Ready | Search/magnifier | Clean semantic markup, structured data, optimized meta. Rank higher. |
-| 6 | Premium Support | Chat bubble | Direct access to our team. Real humans, real answers, real fast. |
+| #   | Title                | Icon (CSS/SVG)    | Description                                                               |
+| --- | -------------------- | ----------------- | ------------------------------------------------------------------------- |
+| 1   | Blazing Performance  | Lightning bolt    | Sub-2s load times. Optimized assets, lazy loading, minimal JS overhead.   |
+| 2   | Mobile-First Design  | Phone outline     | Built mobile-first. Every pixel considered for thumb-friendly navigation. |
+| 3   | Conversion Optimized | Trending-up arrow | Every layout decision backed by conversion data. Sell more, effortlessly. |
+| 4   | One-Click Setup      | Wrench/gear       | Import demo content in one click. Be live in minutes, not days.           |
+| 5   | SEO Ready            | Search/magnifier  | Clean semantic markup, structured data, optimized meta. Rank higher.      |
+| 6   | Premium Support      | Chat bubble       | Direct access to our team. Real humans, real answers, real fast.          |
 
 **Background:** 2-3 floating 3D geometric shapes (translucent, slow rotation) behind the grid for depth.
 
@@ -223,6 +236,7 @@ Dark surface strip between hero and features.
 **Layout:** Two columns — left (35%) feature list, right (65%) 3D mockup.
 
 **Left — Feature List:**
+
 - Label: `EXPLORE` — JetBrains Mono
 - 4 items: Homepage, Product Page, Collection, Cart & Checkout
 - Each item: title + short description
@@ -231,6 +245,7 @@ Dark surface strip between hero and features.
 - Active item changes as user scrolls through the section: the Theme Preview section is divided into 4 equal scroll zones (25% each). As the user scrolls through each zone, the corresponding feature highlights. Clicking a feature item also switches the mockup.
 
 **Right — 3D Mockup:**
+
 - Browser chrome frame in perspective (`rotateY(-8deg) rotateX(3deg)`)
 - Abstract store wireframe inside — each page layout is a different wireframe arrangement:
   - Homepage: nav + hero banner + 3-column product grid
@@ -245,6 +260,7 @@ Dark surface strip between hero and features.
 ### 6. Pricing
 
 **Header:**
+
 - Label: `PRICING` — JetBrains Mono
 - Headline: "One Theme. Everything Included." — Orbitron, weight 200
 
@@ -255,6 +271,7 @@ Dark surface strip between hero and features.
 - 3D tilt on hover following cursor
 
 **Content:**
+
 - Label: `APEX THEME`
 - Price: `$99` or `10,000 LE` (geo-detected, same logic as hero)
 - Subtitle: "one-time payment"
@@ -267,6 +284,7 @@ Dark surface strip between hero and features.
 Accordion section between Pricing and Footer.
 
 **Header:**
+
 - Label: `FAQ` — JetBrains Mono
 - Headline: "Questions? Answered." — Orbitron, weight 200
 
@@ -280,14 +298,14 @@ Accordion section between Pricing and Footer.
 
 **Questions:**
 
-| # | Question | Answer |
-|---|----------|--------|
-| 1 | What's included with the theme? | Everything. 20+ premium sections, lifetime updates, priority support, mobile-optimized layouts, SEO-ready markup, and one-click demo import. No hidden fees, no upsells. |
-| 2 | Do I need coding skills? | Not at all. APEX is designed for Shopify's drag-and-drop editor. Customize everything visually — no code required. |
-| 3 | Is there a refund policy? | We stand behind our theme. If you're not satisfied within 14 days, we'll work with you to make it right or offer a full refund. |
-| 4 | Can I use it on multiple stores? | Each license covers one store. Need it for multiple stores? Contact us for a multi-store discount. |
-| 5 | How fast is the theme? | APEX consistently scores 90+ on Google PageSpeed. We obsess over performance so your customers never wait. |
-| 6 | What kind of support do you offer? | 24/7 priority support via email and DM. Real humans who know the theme inside out. Most issues resolved within hours. |
+| #   | Question                           | Answer                                                                                                                                                                   |
+| --- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | What's included with the theme?    | Everything. 20+ premium sections, lifetime updates, priority support, mobile-optimized layouts, SEO-ready markup, and one-click demo import. No hidden fees, no upsells. |
+| 2   | Do I need coding skills?           | Not at all. APEX is designed for Shopify's drag-and-drop editor. Customize everything visually — no code required.                                                       |
+| 3   | Is there a refund policy?          | We stand behind our theme. If you're not satisfied within 14 days, we'll work with you to make it right or offer a full refund.                                          |
+| 4   | Can I use it on multiple stores?   | Each license covers one store. Need it for multiple stores? Contact us for a multi-store discount.                                                                       |
+| 5   | How fast is the theme?             | APEX consistently scores 90+ on Google PageSpeed. We obsess over performance so your customers never wait.                                                               |
+| 6   | What kind of support do you offer? | 24/7 priority support via email and DM. Real humans who know the theme inside out. Most issues resolved within hours.                                                    |
 
 ### 8. Footer
 
@@ -305,11 +323,11 @@ Minimal, three-part layout.
 
 ## Responsive Breakpoints
 
-| Breakpoint | Behavior |
-|-----------|----------|
-| > 1024px | Full desktop layout |
-| 768–1024px | Tablet — 2-column features, stacked hero |
-| < 768px | Mobile — single column, hamburger nav, full-width CTAs |
+| Breakpoint | Behavior                                               |
+| ---------- | ------------------------------------------------------ |
+| > 1024px   | Full desktop layout                                    |
+| 768–1024px | Tablet — 2-column features, stacked hero               |
+| < 768px    | Mobile — single column, hamburger nav, full-width CTAs |
 
 ## File Structure
 
