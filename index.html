@@ -654,6 +654,114 @@
     @media (min-width: 769px) and (max-width: 1024px) {
       .features-grid { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* Theme Preview */
+    .preview {
+      padding: var(--section-padding);
+      min-height: 100vh;
+    }
+    .preview-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 60px;
+    }
+    .preview-list { flex: 0 0 35%; padding-top: 20px; }
+    .preview-items { margin-top: 16px; }
+    .preview-item {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 14px 0 14px 16px;
+      border-left: 2px solid var(--border);
+      cursor: none;
+      transition: border-color 0.3s ease;
+      margin-bottom: 4px;
+    }
+    .preview-item.active { border-left-color: var(--text-primary); }
+    .preview-item-title {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.3s ease;
+    }
+    .preview-item.active .preview-item-title { color: var(--text-primary); }
+    .preview-item-desc {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      transition: color 0.3s ease;
+    }
+    .preview-item.active .preview-item-desc { color: var(--text-secondary); }
+
+    /* Preview mockup */
+    .preview-mockup-wrap {
+      flex: 1;
+      perspective: 800px;
+      position: sticky;
+      top: 120px;
+    }
+    .preview-mockup {
+      background: var(--glass-fill);
+      border: 1px solid var(--glass-border-color);
+      border-radius: 12px;
+      padding: 14px;
+      transform: rotateY(-8deg) rotateX(3deg);
+      transition: transform 0.15s ease;
+    }
+    .preview-screens { position: relative; min-height: 220px; }
+    .preview-screen {
+      position: absolute;
+      inset: 0;
+      padding: 12px;
+      background: rgba(255,255,255,0.02);
+      border-radius: 6px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .preview-screen.active { opacity: 1; position: relative; }
+
+    /* Wireframe elements */
+    .pm-nav { height: 8px; width: 60%; background: rgba(255,255,255,0.06); border-radius: 4px; margin-bottom: 12px; }
+    .pm-hero { height: 50px; background: rgba(255,255,255,0.03); border-radius: 4px; margin-bottom: 10px; }
+    .pm-grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+    .pm-grid3 div { height: 45px; background: rgba(255,255,255,0.03); border-radius: 4px; }
+    .pm-product { display: flex; gap: 10px; }
+    .pm-img { flex: 1; height: 120px; background: rgba(255,255,255,0.03); border-radius: 4px; }
+    .pm-details { flex: 1; display: flex; flex-direction: column; gap: 8px; padding-top: 8px; }
+    .pm-line { height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; }
+    .pm-line.w60 { width: 60%; }
+    .pm-line.w40 { width: 40%; }
+    .pm-btn { height: 24px; width: 80%; background: rgba(255,255,255,0.06); border-radius: 4px; margin-top: auto; }
+    .pm-collection { display: flex; gap: 10px; }
+    .pm-sidebar { flex: 0 0 60px; height: 120px; background: rgba(255,255,255,0.03); border-radius: 4px; }
+    .pm-cart { display: flex; gap: 10px; }
+    .pm-cart-items { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .pm-cart-item { height: 40px; background: rgba(255,255,255,0.03); border-radius: 4px; }
+    .pm-cart-summary { flex: 0 0 100px; height: 90px; background: rgba(255,255,255,0.03); border-radius: 4px; }
+
+    /* Preview tablet + mobile */
+    @media (max-width: 1024px) {
+      .preview-content { flex-direction: column-reverse; }
+      .preview-mockup-wrap { position: static; max-width: 400px; margin: 0 auto; }
+    }
+    @media (max-width: 768px) {
+      .preview-content { flex-direction: column-reverse; }
+      .preview-mockup-wrap { position: static; max-width: 320px; margin: 0 auto; }
+      .preview-items { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+      .preview-item {
+        flex: 0 0 auto;
+        border-left: none;
+        border-bottom: 2px solid var(--border);
+        padding: 8px 16px;
+        white-space: nowrap;
+      }
+      .preview-item.active { border-bottom-color: var(--text-primary); }
+      .preview-item-desc { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -792,7 +900,75 @@
         </div>
       </div>
     </section>
-    <section id="preview" class="preview"></section>
+    <section id="preview" class="preview">
+      <div class="container preview-content">
+        <div class="preview-list">
+          <span class="label">EXPLORE</span>
+          <div class="preview-items">
+            <button class="preview-item active" data-preview="0">
+              <span class="preview-item-title">Homepage</span>
+              <span class="preview-item-desc">Hero, collections, featured products</span>
+            </button>
+            <button class="preview-item" data-preview="1">
+              <span class="preview-item-title">Product Page</span>
+              <span class="preview-item-desc">Gallery, variants, reviews</span>
+            </button>
+            <button class="preview-item" data-preview="2">
+              <span class="preview-item-title">Collection</span>
+              <span class="preview-item-desc">Grid, filters, sorting</span>
+            </button>
+            <button class="preview-item" data-preview="3">
+              <span class="preview-item-title">Cart &amp; Checkout</span>
+              <span class="preview-item-desc">Slide-out cart, upsells</span>
+            </button>
+          </div>
+        </div>
+        <div class="preview-mockup-wrap" id="previewMockup">
+          <div class="preview-mockup">
+            <div class="mockup-chrome"><span></span><span></span><span></span></div>
+            <div class="preview-screens">
+              <!-- Screen 0: Homepage -->
+              <div class="preview-screen active">
+                <div class="pm-nav"></div>
+                <div class="pm-hero"></div>
+                <div class="pm-grid3"><div></div><div></div><div></div></div>
+              </div>
+              <!-- Screen 1: Product -->
+              <div class="preview-screen">
+                <div class="pm-nav"></div>
+                <div class="pm-product">
+                  <div class="pm-img"></div>
+                  <div class="pm-details">
+                    <div class="pm-line w60"></div>
+                    <div class="pm-line w40"></div>
+                    <div class="pm-btn"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Screen 2: Collection -->
+              <div class="preview-screen">
+                <div class="pm-nav"></div>
+                <div class="pm-collection">
+                  <div class="pm-sidebar"></div>
+                  <div class="pm-grid3"><div></div><div></div><div></div></div>
+                </div>
+              </div>
+              <!-- Screen 3: Cart -->
+              <div class="preview-screen">
+                <div class="pm-nav"></div>
+                <div class="pm-cart">
+                  <div class="pm-cart-items">
+                    <div class="pm-cart-item"></div>
+                    <div class="pm-cart-item"></div>
+                  </div>
+                  <div class="pm-cart-summary"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="pricing" class="pricing"></section>
     <section id="faq" class="faq"></section>
   </main>
@@ -996,6 +1172,52 @@
           card.style.transform = '';
         });
       });
+    })();
+
+    // Theme Preview — scroll sync + click
+    (function() {
+      const section = document.getElementById('preview');
+      const items = section.querySelectorAll('.preview-item');
+      const screens = section.querySelectorAll('.preview-screen');
+      const mockupEl = section.querySelector('.preview-mockup');
+      let currentIndex = 0;
+
+      function setActive(index) {
+        if (index === currentIndex && items[index].classList.contains('active')) return;
+        currentIndex = index;
+        items.forEach((item, i) => item.classList.toggle('active', i === index));
+        screens.forEach((screen, i) => screen.classList.toggle('active', i === index));
+      }
+
+      // Click to switch
+      items.forEach((item, i) => {
+        item.addEventListener('click', () => setActive(i));
+      });
+
+      // Scroll sync — divide section into 4 zones
+      const scrollObserver = new IntersectionObserver(() => {
+        // Recalc on intersection
+      }, { threshold: 0 });
+
+      window.addEventListener('scroll', () => {
+        const rect = section.getBoundingClientRect();
+        const sectionH = rect.height;
+        const scrolled = -rect.top;
+        if (scrolled < 0 || scrolled > sectionH) return;
+        const progress = scrolled / sectionH;
+        const index = Math.min(3, Math.floor(progress * 4));
+        setActive(index);
+      });
+
+      // Mockup parallax
+      if (mockupEl && window.matchMedia('(pointer: fine)').matches) {
+        section.addEventListener('mousemove', (e) => {
+          const rect = section.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+          const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+          mockupEl.style.transform = `rotateY(${-8 + x * 4}deg) rotateX(${3 + y * -3}deg)`;
+        });
+      }
     })();
   </script>
 </body>
