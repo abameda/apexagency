@@ -1078,6 +1078,53 @@
       line-height: 1.7;
       padding-right: 32px;
     }
+    /* Contact Form */
+    .contact-section { padding: var(--section-padding); }
+    .contact-card {
+      max-width: 500px;
+      margin: 0 auto;
+      background: var(--glass-fill);
+      border: 1px solid var(--glass-border-color);
+      border-radius: 16px;
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
+    }
+    .contact-card:hover { border-color: var(--hover-strong); }
+    .form-group { margin-bottom: 16px; }
+    .form-group:last-of-type { margin-bottom: 24px; }
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      resize: none;
+    }
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+    .form-input:focus {
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
+    }
+    .form-submit {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: var(--font-body);
+      letter-spacing: 1px;
+    }
     /* Footer */
     .footer {
       border-top: 1px solid var(--border);
@@ -1142,8 +1189,9 @@
       <a href="#" class="nav-logo">APEX</a>
       <div class="nav-pill">
         <a href="#features" class="nav-link">Features</a>
-        <a href="#pricing" class="nav-link">Pricing</a>
         <a href="#preview" class="nav-link">Preview</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#reviews" class="nav-link">Reviews</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
       <a href="#" class="cta-btn nav-cta">Get The Theme</a>
@@ -1153,8 +1201,9 @@
     </div>
     <div class="nav-mobile-overlay">
       <a href="#features" class="nav-link">Features</a>
-      <a href="#pricing" class="nav-link">Pricing</a>
       <a href="#preview" class="nav-link">Preview</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#reviews" class="nav-link">Reviews</a>
       <a href="#contact" class="nav-link">Contact</a>
       <a href="#" class="cta-btn">Get The Theme</a>
     </div>
@@ -1506,8 +1555,30 @@
         </div>
       </div>
     </section>
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="label">GET IN TOUCH</span>
+          <h2>Let's Talk</h2>
+        </div>
+        <div class="contact-card reveal" data-tilt>
+          <form id="contactForm">
+            <div class="form-group">
+              <input type="text" class="form-input" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-input" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-input" rows="4" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="cta-btn form-submit">SEND MESSAGE</button>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer id="contact" class="footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer-main">
         <div class="footer-brand">
@@ -1575,7 +1646,7 @@
       // Hover states
       document.addEventListener('mouseover', (e) => {
         const link = e.target.closest('a, button, [role="button"], .nav-link, .cta-btn');
-        const card = e.target.closest('.feature-card, .pricing-card, .faq-item');
+        const card = e.target.closest('.feature-card, .pricing-card, .faq-item, .review-card, .contact-card');
         const text = e.target.closest('p, h1, h2, h3, span:not(.nav-logo)');
         if (link) {
           ring.classList.add('cursor-hover-link');
@@ -1587,7 +1658,7 @@
       });
       document.addEventListener('mouseout', (e) => {
         const link = e.target.closest('a, button, [role="button"], .nav-link, .cta-btn');
-        const card = e.target.closest('.feature-card, .pricing-card, .faq-item');
+        const card = e.target.closest('.feature-card, .pricing-card, .faq-item, .review-card, .contact-card');
         const text = e.target.closest('p, h1, h2, h3, span:not(.nav-logo)');
         if (link) ring.classList.remove('cursor-hover-link');
         if (card) ring.classList.remove('cursor-hover-card');
@@ -1815,6 +1886,25 @@
             toggle(item);
           }
         });
+      });
+    })();
+
+    // Contact form — prevent default reload
+    (function() {
+      const form = document.getElementById('contactForm');
+      if (!form) return;
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('.form-submit');
+        btn.textContent = 'SENT ✓';
+        btn.style.opacity = '0.6';
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.textContent = 'SEND MESSAGE';
+          btn.style.opacity = '1';
+          btn.disabled = false;
+          form.reset();
+        }, 3000);
       });
     })();
 
