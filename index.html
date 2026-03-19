@@ -1249,6 +1249,20 @@
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
   <script>
+    // Unified geo pricing — runs once, updates all price elements
+    (function() {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const isEgypt = tz === 'Africa/Cairo';
+      window.APEX_PRICE = isEgypt ? '10,000 LE' : '$99';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const heroBuyBtn = document.getElementById('heroBuyBtn');
+        if (heroBuyBtn) heroBuyBtn.textContent = `BUY NOW — ${window.APEX_PRICE}`;
+        const pricingAmount = document.getElementById('pricingAmount');
+        if (pricingAmount) pricingAmount.textContent = window.APEX_PRICE;
+      });
+    })();
+
     // Custom Cursor
     (function() {
       const dot = document.getElementById('cursorDot');
@@ -1520,6 +1534,19 @@
         });
       });
     })();
+
+    // Scroll reveal observer — reveal all .reveal elements on scroll
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    });
   </script>
 </body>
 </html>
