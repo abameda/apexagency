@@ -834,6 +834,53 @@
       border-radius: 8px;
       font-size: 13px;
     }
+    /* FAQ */
+    .faq-section { padding: var(--section-padding); }
+    .faq-list { max-width: 600px; margin: 0 auto; }
+    .faq-item {
+      border-top: 1px solid var(--border);
+      cursor: none;
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+    .faq-question span:first-child {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      transition: color 0.3s ease;
+    }
+    .faq-item.active .faq-question span:first-child { color: var(--text-primary); }
+    .faq-icon {
+      font-size: 18px;
+      color: var(--text-muted);
+      transition: transform 0.3s ease, color 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+      color: var(--text-secondary);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 0;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding: 0 0 18px;
+    }
+    .faq-answer p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding-right: 32px;
+    }
   </style>
 </head>
 <body>
@@ -1063,7 +1110,70 @@
         </div>
       </div>
     </section>
-    <section id="faq" class="faq"></section>
+    <section id="faq" class="faq-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="label">FAQ</span>
+          <h2>Questions? Answered.</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal" tabindex="0" role="button" aria-expanded="false">
+            <div class="faq-question">
+              <span>What's included with the theme?</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Everything. 20+ premium sections, lifetime updates, priority support, mobile-optimized layouts, SEO-ready markup, and one-click demo import. No hidden fees, no upsells.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" tabindex="0" role="button" aria-expanded="false">
+            <div class="faq-question">
+              <span>Do I need coding skills?</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Not at all. APEX is designed for Shopify's drag-and-drop editor. Customize everything visually — no code required.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" tabindex="0" role="button" aria-expanded="false">
+            <div class="faq-question">
+              <span>Is there a refund policy?</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>We stand behind our theme. If you're not satisfied within 14 days, we'll work with you to make it right or offer a full refund.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" tabindex="0" role="button" aria-expanded="false">
+            <div class="faq-question">
+              <span>Can I use it on multiple stores?</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Each license covers one store. Need it for multiple stores? Contact us for a multi-store discount.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" tabindex="0" role="button" aria-expanded="false">
+            <div class="faq-question">
+              <span>How fast is the theme?</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>APEX consistently scores 90+ on Google PageSpeed. We obsess over performance so your customers never wait.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal" tabindex="0" role="button" aria-expanded="false">
+            <div class="faq-question">
+              <span>What kind of support do you offer?</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>24/7 priority support via email and DM. Real humans who know the theme inside out. Most issues resolved within hours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
   <footer id="contact" class="footer"></footer>
   <div class="cursor-dot" id="cursorDot"></div>
@@ -1311,6 +1421,34 @@
           mockupEl.style.transform = `rotateY(${-8 + x * 4}deg) rotateX(${3 + y * -3}deg)`;
         });
       }
+    })();
+    // FAQ Accordion
+    (function() {
+      const items = document.querySelectorAll('.faq-item');
+
+      function toggle(item) {
+        const isActive = item.classList.contains('active');
+        // Close all
+        items.forEach(i => {
+          i.classList.remove('active');
+          i.setAttribute('aria-expanded', 'false');
+        });
+        // Open clicked (if it was closed)
+        if (!isActive) {
+          item.classList.add('active');
+          item.setAttribute('aria-expanded', 'true');
+        }
+      }
+
+      items.forEach(item => {
+        item.addEventListener('click', () => toggle(item));
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle(item);
+          }
+        });
+      });
     })();
   </script>
 </body>
