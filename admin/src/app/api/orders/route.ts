@@ -3,6 +3,10 @@ import { normalizePhone } from "@/lib/phone";
 import { notifyAdmins } from "@/lib/notifications";
 import { NextRequest, NextResponse } from "next/server";
 
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204 });
+}
+
 export async function POST(request: NextRequest) {
   const body = await request.json();
 

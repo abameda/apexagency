@@ -4,6 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg", "application/pdf"];
 const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204 });
+}
+
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const file = formData.get("file") as File | null;
