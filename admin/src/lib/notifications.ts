@@ -1,6 +1,4 @@
 import { Resend } from "resend";
-import webpush from "web-push";
-import { createAdminClient } from "./supabase/admin";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -12,60 +10,40 @@ interface OrderNotification {
   method: string;
 }
 
-export async function notifyAdmins(order: OrderNotification) {
-  const message = `New APEX order from ${order.name} - ${order.amount} ${order.currency} via ${order.method}. Review now.`;
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
 
-  // 1. Email notification
+export async function notifyAdmins(order: OrderNotification) {
+  const safeName = escapeHtml(order.name);
+  const safeEmail = escapeHtml(order.email);
+  const safeAmount = escapeHtml(order.amount);
+  const safeCurrency = escapeHtml(order.currency);
+  const safeMethod = escapeHtml(order.method);
+  const dashboardUrl = process.env.NEXT_PUBLIC_APP_URL || "https://apexagency-dashboard.vercel.app";
+
   await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
     to: process.env.ADMIN_EMAIL!,
     subject: `New payment from ${order.name} — ${order.method} — ${order.amount} ${order.currency}`,
     html: `
-      <div style="font-family: sans-serif; padding: 20px;">
-        <h2>New Payment Submission</h2>
-        <p><strong>Customer:</strong> ${order.name} (${order.email})</p>
-        <p><strong>Amount:</strong> ${order.amount} ${order.currency}</p>
-        <p><strong>Method:</strong> ${order.method}</p>
-        <p><a href="${process.env.NEXT_PUBLIC_APP_URL}/pending">Review in Dashboard</a></p>
+      <div style="font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #0A0A0A; margin: 0; padding: 40px 20px;">
+        <div style="max-width: 520px; margin: 0 auto;">
+          <p style="color: #FFFFFF; font-size: 20px; font-weight: 300; letter-spacing: 4px; text-align: center; margin-bottom: 32px;">APEX</p>
+          <div style="background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 32px;">
+            <p style="color: #F59E0B; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;">New Order</p>
+            <p style="color: #FFFFFF; font-size: 18px; font-weight: 400; margin-bottom: 16px;">${safeName}</p>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr><td style="color: rgba(255,255,255,0.4); font-size: 13px; padding: 8px 0;">Email</td><td style="color: rgba(255,255,255,0.7); font-size: 13px; text-align: right;">${safeEmail}</td></tr>
+              <tr><td style="color: rgba(255,255,255,0.4); font-size: 13px; padding: 8px 0;">Amount</td><td style="color: #FFFFFF; font-size: 13px; text-align: right; font-weight: 500;">${safeAmount} ${safeCurrency}</td></tr>
+              <tr><td style="color: rgba(255,255,255,0.4); font-size: 13px; padding: 8px 0;">Method</td><td style="color: rgba(255,255,255,0.7); font-size: 13px; text-align: right;">${safeMethod}</td></tr>
+            </table>
+            <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 24px 0;" />
+            <a href="${dashboardUrl}/pending" style="display: block; background-color: #FFFFFF; color: #0A0A0A; text-align: center; padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none;">REVIEW ORDER</a>
+          </div>
+          <p style="color: rgba(255,255,255,0.25); font-size: 11px; text-align: center; margin-top: 32px;">APEX Agency — Premium Shopify Themes</p>
+        </div>
       </div>
     `,
   });
-
-  // 2. WhatsApp via CallMeBot
-  if (process.env.CALLMEBOT_PHONE && process.env.CALLMEBOT_API_KEY) {
-    const encoded = encodeURIComponent(message);
-    await fetch(
-      `https://api.callmebot.com/whatsapp.php?phone=${process.env.CALLMEBOT_PHONE}&text=${encoded}&apikey=${process.env.CALLMEBOT_API_KEY}`
-    ).catch(() => {
-      // Non-critical, don't fail the request
-    });
-  }
-
-  // 3. Web push notifications
-  if (process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY) {
-    webpush.setVapidDetails(
-      "mailto:admin@apexagencyxo.com",
-      process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
-      process.env.VAPID_PRIVATE_KEY
-    );
-
-    const supabase = createAdminClient();
-    const { data: subs } = await supabase
-      .from("settings")
-      .select("value")
-      .like("key", "push_sub_%");
-
-    for (const sub of subs || []) {
-      webpush
-        .sendNotification(
-          JSON.parse(sub.value),
-          JSON.stringify({
-            title: `New order from ${order.name}`,
-            body: `${order.amount} ${order.currency} via ${order.method}`,
-            url: "/pending",
-          })
-        )
-        .catch(() => {});
-    }
-  }
 }
