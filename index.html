@@ -2187,6 +2187,9 @@
           qrImage: m.qr_code_url,
           paymentLink: m.direct_link
         }));
+        // Re-render if checkout grid already exists
+        const grid = document.getElementById('checkoutMethods');
+        if (grid) { grid.innerHTML = ''; CHECKOUT_CONFIG.forEach(m => { const card = document.createElement('div'); card.className = 'checkout-method-card'; card.setAttribute('tabindex','0'); card.setAttribute('role','button'); card.setAttribute('aria-label',m.name); card.dataset.methodId = m.id; card.innerHTML = '<div class="method-icon">'+m.icon+'</div><div class="method-name">'+m.name+'</div>'; grid.appendChild(card); }); }
       })
       .catch(() => {
         // Fallback to defaults if API is down
@@ -2548,7 +2551,7 @@
         clearErrors();
         fileNameEl.style.display = 'none';
         uploadArea.classList.remove('has-file');
-        methodsGrid.querySelectorAll('.checkout-method-card').forEach(c => c.classList.remove('selected'));
+        renderMethods();
         priceEl.textContent = window.APEX_PRICE || '$99';
         goToStep(1);
         overlay.classList.add('active');
