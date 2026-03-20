@@ -93,9 +93,25 @@ export default function ApprovalEmail({ customerName, downloadUrl, manualUrl }: 
             )}
           </Section>
 
-          <Text style={{ color: "rgba(255,255,255,0.2)", fontSize: "11px", textAlign: "center" as const, marginTop: "32px", letterSpacing: "1px" }}>
-            APEX AGENCY
-          </Text>
+          <Section style={{ marginTop: "32px", textAlign: "center" as const }}>
+            <Text style={{ color: "rgba(255,255,255,0.3)", fontSize: "11px", letterSpacing: "1px", margin: "0 0 12px" }}>
+              APEX AGENCY
+            </Text>
+            <div style={{ marginBottom: "12px" }}>
+              <Link href="https://apexagencyxo.vercel.app" style={{ color: "rgba(255,255,255,0.3)", fontSize: "11px", textDecoration: "none", marginRight: "16px" }}>
+                Website
+              </Link>
+              <Link href="https://instagram.com/apexagency.xo" style={{ color: "rgba(255,255,255,0.3)", fontSize: "11px", textDecoration: "none", marginRight: "16px" }}>
+                Instagram
+              </Link>
+              <Link href="https://apexagencyxo.vercel.app/#contact" style={{ color: "rgba(255,255,255,0.3)", fontSize: "11px", textDecoration: "none" }}>
+                Contact
+              </Link>
+            </div>
+            <Text style={{ color: "rgba(255,255,255,0.15)", fontSize: "10px", margin: 0 }}>
+              &copy; 2026 APEX Agency. All rights reserved.
+            </Text>
+          </Section>
         </Container>
       </Body>
     </Html>

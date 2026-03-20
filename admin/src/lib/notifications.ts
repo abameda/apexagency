@@ -60,7 +60,15 @@ export async function notifyAdmins(order: OrderNotification) {
               </div>
               <a href="${dashboardUrl}/pending" style="display:block;background:#FFFFFF;color:#0A0A0A;text-align:center;padding:14px 24px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;letter-spacing:1px;margin-top:24px;">REVIEW ORDER</a>
             </div>
-            <p style="color:rgba(255,255,255,0.2);font-size:11px;text-align:center;margin-top:32px;letter-spacing:1px;">APEX AGENCY</p>
+            <div style="text-align:center;margin-top:32px;">
+              <p style="color:rgba(255,255,255,0.3);font-size:11px;letter-spacing:1px;margin:0 0 12px;">APEX AGENCY</p>
+              <p style="margin:0 0 12px;">
+                <a href="https://apexagencyxo.vercel.app" style="color:rgba(255,255,255,0.3);font-size:11px;text-decoration:none;margin-right:16px;">Website</a>
+                <a href="https://instagram.com/apexagency.xo" style="color:rgba(255,255,255,0.3);font-size:11px;text-decoration:none;margin-right:16px;">Instagram</a>
+                <a href="https://apexagencyxo.vercel.app/#contact" style="color:rgba(255,255,255,0.3);font-size:11px;text-decoration:none;">Contact</a>
+              </p>
+              <p style="color:rgba(255,255,255,0.15);font-size:10px;margin:0;">&copy; 2026 APEX Agency. All rights reserved.</p>
+            </div>
           </div>
         </div>
       `,

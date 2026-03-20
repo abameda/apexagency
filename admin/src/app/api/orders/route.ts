@@ -53,14 +53,18 @@ export async function POST(request: NextRequest) {
     .eq("id", payment_method_id)
     .single();
 
-  // Send notifications (non-blocking)
-  notifyAdmins({
-    name: full_name,
-    email,
-    amount: String(price_paid),
-    currency,
-    method: method?.name || "Unknown",
-  }).catch(console.error);
+  // Send admin notification (must await so Vercel doesn't kill it)
+  try {
+    await notifyAdmins({
+      name: full_name,
+      email,
+      amount: String(price_paid),
+      currency,
+      method: method?.name || "Unknown",
+    });
+  } catch (notifyErr) {
+    console.error("Admin notification failed:", notifyErr);
+  }
 
   return NextResponse.json({ id: data.id, status: "pending" }, { status: 201 });
 }
