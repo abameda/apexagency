@@ -2136,7 +2136,7 @@
       window.APEX_CURRENCY = isEgypt ? 'EGP' : 'USD';
 
       // Fetch live prices from admin API
-      fetch('https://admin.apexagencyxo.com/api/settings')
+      fetch('https://apexagency-dashboard.vercel.app/api/settings')
         .then(r => r.json())
         .then(settings => {
           if (isEgypt) {
@@ -2173,7 +2173,7 @@
       'default': '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 7H3a1 1 0 00-1 1v10a1 1 0 001 1h18a1 1 0 001-1V8a1 1 0 00-1-1zm-1 10H4V9h16v8z"/></svg>'
     };
 
-    fetch('https://admin.apexagencyxo.com/api/payment-methods')
+    fetch('https://apexagency-dashboard.vercel.app/api/payment-methods')
       .then(r => r.json())
       .then(methods => {
         CHECKOUT_CONFIG = methods.map(m => ({
@@ -2732,7 +2732,7 @@
           // 1. Upload screenshot
           const fileData = new FormData();
           fileData.append('file', invoiceInput.files[0]);
-          const uploadRes = await fetch('https://admin.apexagencyxo.com/api/upload', {
+          const uploadRes = await fetch('https://apexagency-dashboard.vercel.app/api/upload', {
             method: 'POST',
             body: fileData
           });
@@ -2741,7 +2741,7 @@
 
           // 2. Create order
           const countryCode = document.getElementById('checkoutCountryCode').value;
-          const orderRes = await fetch('https://admin.apexagencyxo.com/api/orders', {
+          const orderRes = await fetch('https://apexagency-dashboard.vercel.app/api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
