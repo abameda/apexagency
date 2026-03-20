@@ -47,21 +47,44 @@ export default function PendingPage() {
   }, []);
 
   if (loading) {
-    return <div className="text-text-muted text-center py-12">Loading...</div>;
+    return (
+      <div className="flex flex-col items-center justify-center py-20 gap-3">
+        <div className="w-8 h-8 border-2 border-border border-t-text-secondary rounded-full animate-spin" />
+        <p className="text-text-muted text-sm">Loading orders...</p>
+      </div>
+    );
   }
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="font-heading text-lg tracking-wider">PENDING REVIEWS</h1>
-        <span className="bg-warning/10 text-warning text-xs px-3 py-1 rounded-full">
-          {orders.length} pending
-        </span>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="font-heading text-lg tracking-wider">PENDING REVIEWS</h1>
+          <p className="text-text-muted text-sm mt-1">Review and approve incoming orders</p>
+        </div>
+        {orders.length > 0 && (
+          <span className="relative flex items-center gap-2 bg-warning/10 text-warning text-xs font-medium px-3.5 py-1.5 rounded-full border border-warning/20">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-warning opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-warning" />
+            </span>
+            {orders.length} pending
+          </span>
+        )}
       </div>
 
       {orders.length === 0 ? (
-        <div className="text-text-muted text-center py-12">
-          No pending orders
+        <div className="flex flex-col items-center justify-center py-20 gap-4">
+          <div className="w-16 h-16 rounded-2xl bg-surface border border-border flex items-center justify-center">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-text-muted">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <div className="text-center">
+            <p className="text-text-secondary font-medium">All caught up</p>
+            <p className="text-text-muted text-sm mt-1">No pending orders to review</p>
+          </div>
         </div>
       ) : (
         <div className="grid gap-4">
