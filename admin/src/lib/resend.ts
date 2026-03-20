@@ -7,33 +7,32 @@ import { createAdminClient } from "./supabase/admin";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendApprovalEmail(customerName: string, customerEmail: string) {
-  const supabase = createAdminClient();
+  let downloadUrl: string | null = null;
+  let manualUrl: string | null = null;
 
-  // Generate signed URLs for theme files (48 hours)
-  const { data: zipUrl } = await supabase.storage
-    .from("theme-files")
-    .createSignedUrl("apex-pro-theme.zip", 48 * 60 * 60);
-
-  const { data: manualUrl } = await supabase.storage
-    .from("theme-files")
-    .createSignedUrl("apex-pro-manual.pdf", 48 * 60 * 60);
-
-  if (!zipUrl?.signedUrl || !manualUrl?.signedUrl) {
-    throw new Error("Failed to generate download URLs");
+  // Try to generate signed URLs for theme files
+  try {
+    const supabase = createAdminClient();
+    const { data: zipUrl } = await supabase.storage
+      .from("theme-files")
+      .createSignedUrl("apex-pro-theme.zip", 48 * 60 * 60);
+    const { data: manual } = await supabase.storage
+      .from("theme-files")
+      .createSignedUrl("apex-pro-manual.pdf", 48 * 60 * 60);
+    downloadUrl = zipUrl?.signedUrl || null;
+    manualUrl = manual?.signedUrl || null;
+  } catch {
+    console.error("Could not generate download URLs — theme-files bucket may not exist");
   }
 
   const html = await render(
-    ApprovalEmail({
-      customerName,
-      downloadUrl: zipUrl.signedUrl,
-      manualUrl: manualUrl.signedUrl,
-    })
+    ApprovalEmail({ customerName, downloadUrl, manualUrl })
   );
 
   await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
     to: customerEmail,
-    subject: "Your APEX Theme is Ready ✓",
+    subject: "Your APEX Theme is Ready",
     html,
   });
 }
