@@ -28,13 +28,13 @@ export default function ClientsPage() {
 
       const { data } = await query;
 
-      // Generate signed URLs for screenshots
+      // Generate public URLs for screenshots
       if (data) {
         for (const order of data) {
-          const { data: urlData } = await supabase.storage
+          const { data: urlData } = supabase.storage
             .from("screenshots")
-            .createSignedUrl(order.screenshot_url, 3600);
-          order.screenshot_signed_url = urlData?.signedUrl || "";
+            .getPublicUrl(order.screenshot_url);
+          order.screenshot_signed_url = urlData?.publicUrl || "";
         }
       }
 
